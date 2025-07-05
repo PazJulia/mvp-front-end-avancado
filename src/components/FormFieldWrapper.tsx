@@ -1,4 +1,4 @@
-import LabelWrapper from "./LabelWrapper.tsx";
+import LabelWrapper from "./LabelWrapper";
 
 function FormFieldWrapper({ title, children, error }: {
   title: string,

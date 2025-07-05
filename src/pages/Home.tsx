@@ -1,21 +1,34 @@
 import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import ClassificationTag from "../Components/ClassificationTag.tsx";
+import ClassificationTag from "../components/ClassificationTag.tsx";
 import { useNavigate } from "react-router-dom";
+import type { PacienteModel } from "../models/pacienteModel.ts";
 
 const Home = () => {
   const navigate = useNavigate();
-  const pacientes = [{ nome: "Teste C R S P", classificacao: 0, idade: 4, dataAtualizacao: new Date().toLocaleDateString() },{ nome: "Teste C R S P", classificacao: 1, idade: 4, dataAtualizacao: new Date().toLocaleDateString() }];
+  const raw = localStorage.getItem('pacientes');
+  const pacientes: PacienteModel[] = raw ? JSON.parse(raw) : [];
 
   const classificationBodyTemplate = (paciente: { classificacao: number; }) => {
     return <ClassificationTag classificacao={paciente.classificacao}></ClassificationTag>;
-
   };
 
-  const acoesBodyTemplate = (paciente: { id: number; }) => {
+  const acoesBodyTemplate = (paciente: { id: string; }) => {
     return <div></div>
   };
+
+  function dateToString(date: string): string {
+    return date ? new Date(date).toLocaleDateString() : '';
+  }
+
+  const dataNascimentoBodyTemplate = (paciente: { dataNascimento: string }) => {
+    return dateToString(paciente.dataNascimento);
+  }
+
+  const dataAtualizacaoBodyTemplate = (paciente: { dataAtualizacao: string }) => {
+    return dateToString(paciente.dataAtualizacao);
+  }
 
   return (
     <><h1>Tela inicial</h1><Button severity="info" label="Cadastrar Paciente" onClick={() => navigate('/form')} />
@@ -29,8 +42,8 @@ const Home = () => {
         >
           <Column field="classificacao" header="Classificação" body={classificationBodyTemplate} style={{ width: '25%' }}></Column>
           <Column field="nome" header="Nome" style={{ width: '25%' }}></Column>
-          <Column field="idade" header="Idade" style={{ width: '25%' }}></Column>
-          <Column field="dataAtualizacao" header="Data da Última Atualização" style={{ width: '25%' }}></Column>
+          <Column field="dataNascimento" header="Data de Nascimento" body={dataNascimentoBodyTemplate} style={{ width: '25%' }}></Column>
+          <Column field="dataAtualizacao" header="Data da Última Atualização" body={dataAtualizacaoBodyTemplate} style={{ width: '25%' }}></Column>
           <Column header="Ações" body={acoesBodyTemplate}></Column>
         </DataTable>
       </div>

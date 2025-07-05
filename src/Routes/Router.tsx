@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import Form from "../Pages/Form.tsx";
-import Home from "../Pages/Home.tsx";
-import NotFound from "../Pages/NotFound.tsx";
+import Form from "../pages/Form.tsx";
+import Home from "../pages/Home.tsx";
+import NotFound from "../pages/NotFound.tsx";
 
 const router = createBrowserRouter([
   {
