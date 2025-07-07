@@ -11,12 +11,15 @@ import FormFieldWrapper from '../components/FormFieldWrapper';
 import type { PacienteModel } from "../models/pacienteModel.ts";
 import { Card } from 'primereact/card';
 import AppBreadcrumb from "../components/AppBreadcrumb.tsx";
+import { useToast } from "../context/ToastContext.tsx";
 
 const Form = () => {
   const items = [
     { label: 'Pacientes', command: () => navigate('/') },
     { label: 'Cadastro' }
   ];
+
+  const { showToast } = useToast();
 
   const navigate = useNavigate();
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<PacienteModel>();
@@ -33,9 +36,21 @@ const Form = () => {
       const result = await response.json();
       if (!result.erro) {
         setValue('endereco', `${result.bairro} ${result.logradouro}`);
+      } else {
+        showToast({
+          severity: 'error',
+          summary: 'Ops!',
+          detail: 'Não foi possível encontrar o CEP!',
+          life: 3000
+        });
       }
     } catch (err) {
-      console.error(err);
+      showToast({
+        severity: 'error',
+        summary: 'Ops!',
+        detail: JSON.stringify(err),
+        life: 3000
+      });
     } finally {
       setLoading(false);
     }

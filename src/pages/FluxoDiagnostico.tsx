@@ -6,6 +6,7 @@ import type { PacienteModel } from "../models/pacienteModel.ts";
 import ClassificationTag from "../components/ClassificationTag.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import AppBreadcrumb from "../components/AppBreadcrumb.tsx";
+import { useToast } from "../context/ToastContext.tsx";
 
 type Etapa = 'inicio' | 'sinaisAlarme' | 'comorbidades' | 'sinaisGravidade' | 'classificacao';
 
@@ -18,6 +19,7 @@ interface Respostas {
 
 const FluxoDiagnostico = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const items = [
     { label: 'Pacientes', command: () => navigate('/') },
@@ -74,6 +76,13 @@ const FluxoDiagnostico = () => {
       paciente.classificacao = grupo;
       stored[index] = paciente;
       localStorage.setItem('pacientes', JSON.stringify(stored));
+      showToast({
+        severity: 'success',
+        summary: 'Sucesso!',
+        detail: 'Diagnóstico concluído com sucesso!',
+        life: 3000
+      });
+      navigate('/');
     }
   }
 
@@ -157,7 +166,7 @@ const FluxoDiagnostico = () => {
               {grupo > 0 && (
                 <Button
                   className="ml-2"
-                  label="Salvar Paciente"
+                  label="Salvar"
                   severity="success"
                   onClick={() => atualizarPacienteClassificacao(grupo)}
                 />
