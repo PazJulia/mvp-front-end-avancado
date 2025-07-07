@@ -25,15 +25,28 @@ Este projeto é uma aplicação web desenvolvida com **React** + **Vite** + **Ty
 
 ### 2. Instalação das dependências
 
+```bash
 npm install
 # ou
 yarn install
-
+```
 
 ### 3. Execução em modo desenvolvimento
+```bash
 
 npm run dev
 # ou
 yarn dev
-
+```
 Acesse a aplicação em: http://localhost:5173
+
+---
+
+### 🧪 Lint e Formatação
+Para verificar e aplicar regras de lint e formatação, execute:
+
+```bash
+npm run lint
+# ou
+yarn lint
+```
