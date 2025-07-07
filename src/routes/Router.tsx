@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Form from "../pages/Form.tsx";
 import Home from "../pages/Home.tsx";
 import NotFound from "../pages/NotFound.tsx";
-import FluxoDiagnosticoDengue from "../pages/FluxoDiagnosticoDengue.tsx";
+import FluxoDiagnostico from "../pages/FluxoDiagnostico.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/diagnostico/:id',
-    element: <FluxoDiagnosticoDengue></FluxoDiagnosticoDengue>
+    element: <FluxoDiagnostico></FluxoDiagnostico>
   }
 ])
 

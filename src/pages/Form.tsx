@@ -10,8 +10,14 @@ import Loader from '../components/Loader';
 import FormFieldWrapper from '../components/FormFieldWrapper';
 import type { PacienteModel } from "../models/pacienteModel.ts";
 import { Card } from 'primereact/card';
+import AppBreadcrumb from "../components/AppBreadcrumb.tsx";
 
 const Form = () => {
+  const items = [
+    { label: 'Pacientes', command: () => navigate('/') },
+    { label: 'Cadastro' }
+  ];
+
   const navigate = useNavigate();
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<PacienteModel>();
   const cepObserver = watch('cep');
@@ -55,6 +61,7 @@ const Form = () => {
 
   return (
     <>
+      <AppBreadcrumb items={items}/>
       <Card>
         <div className="grid gap-2">
           <div className="col-12 md:col-8">

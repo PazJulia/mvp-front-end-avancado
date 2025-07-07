@@ -4,7 +4,8 @@ import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
 import type { PacienteModel } from "../models/pacienteModel.ts";
 import ClassificationTag from "../components/ClassificationTag.tsx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import AppBreadcrumb from "../components/AppBreadcrumb.tsx";
 
 type Etapa = 'inicio' | 'sinaisAlarme' | 'comorbidades' | 'sinaisGravidade' | 'classificacao';
 
@@ -15,7 +16,14 @@ interface Respostas {
   temGravidade: boolean;
 }
 
-const FluxoDiagnosticoDengue = () => {
+const FluxoDiagnostico = () => {
+  const navigate = useNavigate();
+
+  const items = [
+    { label: 'Pacientes', command: () => navigate('/') },
+    { label: 'Diagnóstico' }
+  ];
+
   const { id } = useParams();
   const [etapaAtual, setEtapaAtual] = useState<Etapa>(() => {
     const raw = localStorage.getItem('pacientes');
@@ -148,6 +156,7 @@ const FluxoDiagnosticoDengue = () => {
               }}/>
               {grupo > 0 && (
                 <Button
+                  className="ml-2"
                   label="Salvar Paciente"
                   severity="success"
                   onClick={() => atualizarPacienteClassificacao(grupo)}
@@ -159,7 +168,11 @@ const FluxoDiagnosticoDengue = () => {
     }
   };
 
-  return <div className="card flex justify-content-center">{renderEtapa()}</div>;
+  return (
+    <><AppBreadcrumb items={items}></AppBreadcrumb>
+      <div className="flex justify-content-center">{renderEtapa()}</div>
+    </>
+  );
 };
 
-export default FluxoDiagnosticoDengue;
+export default FluxoDiagnostico;
