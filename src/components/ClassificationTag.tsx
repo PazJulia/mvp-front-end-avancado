@@ -19,13 +19,13 @@ function ClassificationTag({classificacao}: {classificacao: number}) {
   function severityLabel(classificacao: number) {
     switch (classificacao) {
       case 1:
-        return "Grupo A";
+        return "Grupo A - Dengue sem sinais de alarme";
       case 2:
-        return "Grupo B";
+        return "Grupo B - Comorbidades / Risco";
       case 3:
-        return "Grupo C";
+        return "Grupo C - Sinais de Alarme";
       case 4:
-        return "Grupo D";
+        return "Grupo D - Dengue Grave";
       default:
         return "Não Classificado";
     }
