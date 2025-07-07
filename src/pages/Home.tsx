@@ -48,11 +48,11 @@ const Home = () => {
   return (
     <>
       <AppBreadcrumb items={items}/>
-      <div>
+      <div className="flex inline justify-content-between align-items-center flex-wrap">
         <h2>Manejo Clínico da Dengue</h2>
-        <Button severity="info" label="Cadastrar Paciente" onClick={() => navigate('/form')}/>
+        <Button style={{ height: '3rem' }} severity="info" label="Cadastrar Paciente" onClick={() => navigate('/form')}/>
       </div>
-      <Card className="mt-4 mb-4">
+      <Card className="mt-4 mb-8">
         Relato de febre, usualmente entre dois e sete dias de duração, e duas ou mais das seguintes manifestações: náusea, vômitos; exantema; mialgia, artralgia; cefaleia,
         dor retro-orbital; petéquias;
         usualmente entre dois e sete dias de duração, e sem foco de infecção aparente.
